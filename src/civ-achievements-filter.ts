@@ -1,0 +1,180 @@
+import { css, LitElement, html, render } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
+import { CivAchievement } from './civ-achievement';
+import { ifDefined } from 'lit-html/directives/if-defined.js'; 
+
+type Achievement = {
+    leader: string | null;
+    leaders?: string[];
+    img: string | null;
+    title: string | null;
+    description: string | null;
+    scenario: string | null;
+    civilization: string | null;
+    map_size: string | null;
+    difficulty: string | null;
+}
+
+@customElement('civ-achievements-filter')
+class CivAchievementsFilter extends LitElement {
+
+    // Source: https://rodydavis.com/posts/lit-html-table/
+    private data;
+
+    @property()
+    public src;
+
+    private unlocked = {};
+
+    static styles = css`
+        :host {
+            --primary-color: #ff0000;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .achievements {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+            grid-gap: 1rem;
+            grid-auto-rows: 1fr
+        }
+
+        .achievements > civ-achievement {
+            background: #f0f0f0;
+        }
+
+        civ-achievement[unlocked] {
+            background: green;
+        }
+    `
+
+    public connectedCallback(): void {
+        super.connectedCallback();
+        this.load();
+    }
+
+    private load(): void
+    {
+        // get data from local storage
+        this.unlocked = JSON.parse(localStorage.getItem('unlocked') || '{}');
+        console.log(this.unlocked);
+
+        const url = new URL(this.src, import.meta.url);
+        fetch(url)
+            .then(response => response.json())
+            .then((json: Achievement[]) => {
+                const filtered = json.reduce(
+                    (carry: Record<string, string[]>, achievement: Achievement) => {
+                        const add = (current: string[]|null, value: string | null): string[] => 
+                            value !== null && current.includes(value) === false
+                                ? [ ...current || [], value]
+                                : current || [];
+
+                        return {
+                            ...carry,
+                            leaders: add(carry.leaders, achievement.leader),
+                            scenarios: add(carry.scenarios, achievement.scenario),
+                            map_sizes: add(carry.map_sizes, achievement.map_size),
+                            difficulties: add(carry.difficulties, achievement.difficulty),
+                        };
+                    },
+                    {}
+                );
+
+                const populate = (select: HTMLElement, values: string[]) => {
+                    for (const value of values) {
+                        const option = document.createElement('option');
+                        option.value = value;
+                        option.innerText = value;
+                        select.appendChild(option);
+                    }
+                }
+
+                populate(this.shadowRoot.querySelector('[name="leader"]'), [ ...filtered.leaders ].sort());
+                populate(this.shadowRoot.querySelector('[name="scenario"]'), filtered.scenarios);
+                populate(this.shadowRoot.querySelector('[name="map_size"]'), filtered.map_sizes);
+                populate(this.shadowRoot.querySelector('[name="difficulty"]'), filtered.difficulties);
+                
+                // Achievements
+                render(
+                    json.map(({ title, img, leader, leaders, scenario, map_size, difficulty, description }) => html`<civ-achievement title=${title} image=${img} leader=${leader} leaders=${JSON.stringify(leaders)} scenario=${scenario} map_size=${map_size} difficulty=${difficulty} description=${description} unlocked=${ifDefined(this.unlocked[title] ? '1' : undefined)} @click=${this._clickAchievement.bind(this)}>`),
+                    this.shadowRoot?.querySelector('.achievements') as HTMLDivElement
+                );
+            })
+            .catch(console.error);
+    }
+
+    private _clickAchievement(event: MouseEvent): void
+    {
+        const achievement = event.target as CivAchievement;
+        if (achievement.unlocked) {
+            achievement.removeAttribute('unlocked');
+            delete this.unlocked[achievement.title];
+        } else {            
+            achievement.setAttribute('unlocked', '1');
+            this.unlocked[achievement.title] = true;
+        }
+
+        localStorage.setItem('unlocked', JSON.stringify(this.unlocked));
+    }
+
+    // Source: https://medium.com/dev-jam/lit-html-communication-between-components-using-the-mediator-pattern-6d1d3d2efce7
+    private onSubmit(event: SubmitEvent): void
+    {
+        event.preventDefault();
+        this.applyFilter();
+    }
+
+    private onChange(event: Event): void
+    {
+        this.applyFilter();
+    }
+
+    private applyFilter(): void 
+    {
+        type Filter = {
+            leader: string;
+            scenario: string;
+            map_size: string;
+            difficulty: string;
+        }
+
+        const filter: Filter = {
+            leader: (this.shadowRoot.querySelector('[name="leader"]') as HTMLSelectElement).value,
+            scenario: (this.shadowRoot.querySelector('[name="scenario"]') as HTMLSelectElement).value,
+            map_size: (this.shadowRoot.querySelector('[name="map_size"]') as HTMLSelectElement).value,
+            difficulty: (this.shadowRoot.querySelector('[name="difficulty"]') as HTMLSelectElement).value
+        };
+
+        this.shadowRoot.querySelectorAll('.achievements > civ-achievement').forEach((achievement: CivAchievement) => {
+            const applies = (achievement: CivAchievement, filter: Filter): boolean => {
+                if (filter.leader && achievement.leader !== filter.leader && !(achievement.leaders || []).includes(filter.leader)) return false;
+                if (filter.scenario && achievement.scenario !== filter.scenario) return false;
+
+                return true;
+            };
+
+            if (applies(achievement, filter)) {
+                achievement.classList.remove('hide');
+            } else {
+                achievement.classList.add('hide');
+            }
+        });
+    }
+
+    render() {
+        return html`
+            <form method="get" @submit=${this.onSubmit}>
+                <select name="leader" @change=${this.onChange}><option selected value="">Leader</option></select>
+                <select name="scenario" @change=${this.onChange}><option selected value="">Scenario</option></select>
+                <select name="map_size" @change=${this.onChange}><option selected value="">Map size</option></select>
+                <select name="difficulty" @change=${this.onChange}><option selected value="">Difficulty</option></select>
+                <input type="submit" value="filter">
+            </form>
+            <div class="achievements"></div>
+        `
+    }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "civ-achievements-explorer",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "start": "web-dev-server --node-resolve --open --watch --app-index assets/index.html"
+  },
+  "devDependencies": {
+    "@web/dev-server": "^0.2.1",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "lit": "^2.7.4"
+  }
+}
