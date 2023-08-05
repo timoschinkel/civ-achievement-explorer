@@ -2864,7 +2864,7 @@
         "percentage": "0.3",
         "title": "Wood for Sheep",
         "description": "Playing as Australia, build a Pasture over Sheep and steal an adjacent player's Lumbermill",
-        "leader": null,
+        "leader": "John Curtin",
         "scenario": null,
         "civilization": "Australia",
         "map_size": null,
