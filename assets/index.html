@@ -1,0 +1,29 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Civilization 6 Achievements Explorer</title>
+    <script type="module" src="../dist/civ-achievements-filter.js"></script>
+    <script type="module" src="../dist/civ-achievement.js"></script>
+    <style>
+      body {
+        background: #1b2939;
+        color: #f0f0f0;
+        font-family: Arial, Helvetica, Verdana, sans-serif;
+      }
+      p {
+        border: solid 1px blue;
+        padding: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Civilization 6 achievements explorer</h1>
+    <details>
+        <summary>About this page</summary>
+        This is a test project to explore the possibilities of web components. The code is available on GitHub. The source of the data is Steam itself.
+    </details>
+    <civ-achievements-filter src="/assets/achievements.json"></civ-achievements-filter>
+  </body>
+</html>

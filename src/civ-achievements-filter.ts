@@ -37,45 +37,78 @@ class CivAchievementsFilter extends LitElement {
 
         .achievements {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
             grid-gap: 1rem;
             grid-auto-rows: 1fr
         }
 
-        .achievements > civ-achievement {
-            background: #f0f0f0;
+        form {
+            margin: .5rem 0;
         }
 
-        civ-achievement[unlocked] {
-            background: green;
+        .progress {
+            margin: .5rem 0;
         }
     `
 
-    public connectedCallback(): void {
+    render() {
+        return html`
+            <form method="get" @submit=${this.onSubmit}>
+                <fieldset>
+                    <legend>Filter</legend>
+                    <input type="search" name="query" @change=${this.onChange} @keyup=${this.onChange}>
+                    <select name="leader" @change=${this.onChange}><option selected value="">Leader</option></select>
+                    <select name="scenario" @change=${this.onChange}><option selected value="">Scenario</option></select>
+                    <select name="map_size" @change=${this.onChange}><option selected value="">Map size</option></select>
+                    <select name="difficulty" @change=${this.onChange}><option selected value="">Difficulty</option></select>
+                    <label><input type="checkbox" name="unlocked" @change=${this.onChange}> Unlocked</label>
+                </fieldset>
+            </form>
+            <div class="progress">
+                <span data-placeholder="unlocked"></span> of <span data-placeholder="total"></span> (<span data-placeholder="percentage"></span>%) achievements unlocked
+            </div>
+            <div class="achievements"></div>
+        `
+    }
+
+    public async connectedCallback(): Promise<void> {
         super.connectedCallback();
-        this.load();
+
+        this.updateComplete
+            .then(() => this.load());
     }
 
     private load(): void
     {
         // get data from local storage
         this.unlocked = JSON.parse(localStorage.getItem('unlocked') || '{}');
-        console.log(this.unlocked);
 
         const url = new URL(this.src, import.meta.url);
         fetch(url)
             .then(response => response.json())
             .then((json: Achievement[]) => {
+                const unlocked = Object.entries(this.unlocked).length;
+                const total = json.length;
+                const percentage = Math.round((unlocked/total)*100);
+                this.shadowRoot.querySelector('[data-placeholder="unlocked"]').innerHTML = unlocked.toString();
+                this.shadowRoot.querySelector('[data-placeholder="total"]').innerHTML = total.toString();
+                this.shadowRoot.querySelector('[data-placeholder="percentage"]').innerHTML = percentage.toString();
+
                 const filtered = json.reduce(
                     (carry: Record<string, string[]>, achievement: Achievement) => {
-                        const add = (current: string[]|null, value: string | null): string[] => 
-                            value !== null && current.includes(value) === false
+                        const add = (current: string[]|null, value: string|string[]|null): string[] => {
+                            if (Array.isArray(value)) {                                
+                                return value.reduce((carry, v) => add(carry, v), [ ...current || []]);
+                            }
+
+                            return value !== null && current.includes(value) === false
                                 ? [ ...current || [], value]
                                 : current || [];
+                        }
 
                         return {
                             ...carry,
-                            leaders: add(carry.leaders, achievement.leader),
+                            leaders: add(carry.leaders, achievement.leader ?? achievement.leaders ?? null),
                             scenarios: add(carry.scenarios, achievement.scenario),
                             map_sizes: add(carry.map_sizes, achievement.map_size),
                             difficulties: add(carry.difficulties, achievement.difficulty),
@@ -99,12 +132,30 @@ class CivAchievementsFilter extends LitElement {
                 populate(this.shadowRoot.querySelector('[name="difficulty"]'), filtered.difficulties);
                 
                 // Achievements
+                let order = 0;
                 render(
-                    json.map(({ title, img, leader, leaders, scenario, map_size, difficulty, description }) => html`<civ-achievement title=${title} image=${img} leader=${leader} leaders=${JSON.stringify(leaders)} scenario=${scenario} map_size=${map_size} difficulty=${difficulty} description=${description} unlocked=${ifDefined(this.unlocked[title] ? '1' : undefined)} @click=${this._clickAchievement.bind(this)}>`),
+                    json.map(({ title, img, leader, leaders, scenario, map_size, difficulty, description }) => html`<civ-achievement data-order="${order++}" @achievement-pinned=${this._handlePinned.bind(this)} @achievement-unpinned=${this._handleUnpinned.bind(this)} title=${title} image=${img} leader=${leader} leaders=${JSON.stringify(leaders)} scenario=${scenario} map_size=${map_size} difficulty=${difficulty} description=${description} unlocked=${ifDefined(this.unlocked[title] ? '1' : undefined)} @click=${this._clickAchievement.bind(this)}>`),
                     this.shadowRoot?.querySelector('.achievements') as HTMLDivElement
                 );
             })
             .catch(console.error);
+    }
+
+    private _handlePinned(event: CustomEvent): void 
+    {
+        // const achievement = event.target as HTMLElement;
+        // achievement.style.order = (0 - this.shadowRoot.querySelectorAll('civ-achievement').length + this.shadowRoot.querySelectorAll('civ-achievement[pinned]').length).toString();
+    }
+
+    private _handleUnpinned(event: CustomEvent): void 
+    {
+        // const achievement = event.target as HTMLElement;
+        // achievement.style.order = '';
+
+        // // renumber all still pinned elements
+        // const pinned = Array.from(this.shadowRoot.querySelectorAll('civ-achievement[pinned="1"]'))
+        //     .sort((one: HTMLElement, another: HTMLElement): number => another.style.order.localeCompare(one.style.order, undefined, { numeric: true }));
+        // console.log(pinned);
     }
 
     private _clickAchievement(event: MouseEvent): void
@@ -136,23 +187,30 @@ class CivAchievementsFilter extends LitElement {
     private applyFilter(): void 
     {
         type Filter = {
+            query: string;
             leader: string;
             scenario: string;
             map_size: string;
             difficulty: string;
+            unlocked: boolean;
         }
 
         const filter: Filter = {
+            query: (this.shadowRoot.querySelector('[name="query"]') as HTMLInputElement).value,
             leader: (this.shadowRoot.querySelector('[name="leader"]') as HTMLSelectElement).value,
             scenario: (this.shadowRoot.querySelector('[name="scenario"]') as HTMLSelectElement).value,
             map_size: (this.shadowRoot.querySelector('[name="map_size"]') as HTMLSelectElement).value,
-            difficulty: (this.shadowRoot.querySelector('[name="difficulty"]') as HTMLSelectElement).value
+            difficulty: (this.shadowRoot.querySelector('[name="difficulty"]') as HTMLSelectElement).value,
+            unlocked: (this.shadowRoot.querySelector('[name="unlocked"]') as HTMLInputElement).checked,
         };
 
         this.shadowRoot.querySelectorAll('.achievements > civ-achievement').forEach((achievement: CivAchievement) => {
             const applies = (achievement: CivAchievement, filter: Filter): boolean => {
+                if (achievement.pinned === '1') return true;
+                if (filter.query && achievement.description.toLocaleLowerCase().includes(filter.query.toLocaleLowerCase()) === false && achievement.title.toLocaleLowerCase().includes(filter.query.toLocaleLowerCase()) === false) return false;
                 if (filter.leader && achievement.leader !== filter.leader && !(achievement.leaders || []).includes(filter.leader)) return false;
                 if (filter.scenario && achievement.scenario !== filter.scenario) return false;
+                if (filter.unlocked && achievement.title in this.unlocked && this.unlocked[achievement.title] === true) return false;
 
                 return true;
             };
@@ -163,18 +221,5 @@ class CivAchievementsFilter extends LitElement {
                 achievement.classList.add('hide');
             }
         });
-    }
-
-    render() {
-        return html`
-            <form method="get" @submit=${this.onSubmit}>
-                <select name="leader" @change=${this.onChange}><option selected value="">Leader</option></select>
-                <select name="scenario" @change=${this.onChange}><option selected value="">Scenario</option></select>
-                <select name="map_size" @change=${this.onChange}><option selected value="">Map size</option></select>
-                <select name="difficulty" @change=${this.onChange}><option selected value="">Difficulty</option></select>
-                <input type="submit" value="filter">
-            </form>
-            <div class="achievements"></div>
-        `
     }
 }

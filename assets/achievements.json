@@ -532,7 +532,7 @@
         "percentage": "8.2",
         "title": "Let Teddy Win",
         "description": "Win a regular game as Theodore Roosevelt",
-        "leader": null,
+        "leader": "Teddy Roosevelt",
         "scenario": "Regular game",
         "civilization": "",
         "map_size": null,
@@ -1269,9 +1269,9 @@
         "percentage": "2.7",
         "title": "A small Country, a great people, so sorely tried",
         "description": "Win a regular game as Queen Wilhelmina",
-        "leader": null,
+        "leader": "Wilhelmina",
         "scenario": "Regular game",
-        "civilization": "",
+        "civilization": null,
         "map_size": null,
         "difficulty": null
     },
@@ -1282,7 +1282,7 @@
         "description": "As Seondeok, build a Spaceport district next to a Seowon",
         "leader": "Seondeok",
         "scenario": null,
-        "civilization": "",
+        "civilization": null,
         "map_size": null,
         "difficulty": null
     },
@@ -1478,7 +1478,7 @@
         "percentage": "2.2",
         "title": "Scythian Horse Rush",
         "description": "Playing as Scythia have 10 Saka Horse Archers in your army",
-        "leader": null,
+        "leaders": ["Tomyris"],
         "scenario": null,
         "civilization": "",
         "map_size": null,
@@ -1734,7 +1734,7 @@
         "leader": null,
         "scenario": null,
         "civilization": "England",
-        "map_size": null,
+        "map_size": "Huge",
         "difficulty": null
     },
     {
@@ -1754,7 +1754,7 @@
         "title": "Liquid Assets",
         "description": "Sink or capture a treasure ship.",
         "leader": null,
-        "scenario": null,
+        "scenario": "Pirates",
         "civilization": null,
         "map_size": null,
         "difficulty": null
@@ -2117,7 +2117,7 @@
         "title": "He Named Them All After Himself?",
         "description": "Settle four cities in Conquests of Alexander on any difficulty",
         "leader": null,
-        "scenario": null,
+        "scenario": "Conquests of Alexander",
         "civilization": null,
         "map_size": null,
         "difficulty": null
@@ -2172,8 +2172,8 @@
         "title": "Naval Supremacy",
         "description": "Privateer - Ensure that your patron has a naval fleet twice the size of any other colonial power.",
         "leader": null,
-        "scenario": null,
-        "civilization": "",
+        "scenario": "Pirates",
+        "civilization": null,
         "map_size": null,
         "difficulty": null
     },
@@ -2226,10 +2226,10 @@
         "percentage": "0.6",
         "title": "Give Peace a Chance",
         "description": "Playing as India on a Huge map, receive +35 Faith in one turn from the Satyagraha ability",
-        "leader": null,
+        "leaders": ["Gandhi", "Chandragupta"],
         "scenario": null,
         "civilization": "India",
-        "map_size": null,
+        "map_size": "Huge",
         "difficulty": null
     },
     {
@@ -2270,9 +2270,9 @@
         "percentage": "0.6",
         "title": "Nobody's Business But the Turks",
         "description": "As the Ottomans, capture another Civilization's capital and then rename it",
-        "leader": null,
+        "leaders": ["Suleiman"],
         "scenario": null,
-        "civilization": "",
+        "civilization": null,
         "map_size": null,
         "difficulty": null
     },
@@ -2370,7 +2370,7 @@
         "title": "Gesundheit",
         "description": "Win the Black Death as the Holy Roman Empire",
         "leader": null,
-        "scenario": null,
+        "scenario": "Black Death",
         "civilization": "",
         "map_size": null,
         "difficulty": null
@@ -2381,7 +2381,7 @@
         "title": "Medieval Medicine",
         "description": "Train 25 Plague Doctors during the Black Death scenario",
         "leader": null,
-        "scenario": null,
+        "scenario": "Black Death",
         "civilization": null,
         "map_size": null,
         "difficulty": null
@@ -2391,7 +2391,7 @@
         "percentage": "0.5",
         "title": "100th Anniversary",
         "description": "As America make a National Park of Crater Lake and both tiles of Yosemite in one game",
-        "leader": null,
+        "leaders": ["Abraham Lincoln", "Teddy Roosevelt"],
         "scenario": null,
         "civilization": "America",
         "map_size": null,
@@ -2403,7 +2403,7 @@
         "title": "Eat, Drink and Be Merry",
         "description": "Win the Black Death as England",
         "leader": null,
-        "scenario": null,
+        "scenario": "Black Death",
         "civilization": "England",
         "map_size": null,
         "difficulty": null
@@ -2501,7 +2501,7 @@
         "percentage": "0.5",
         "title": "Some Wine For Your Soldiers?",
         "description": "Playing as Persia, conquer the original Scythian capital within 10 turns of declaring a surprise war on Scythia",
-        "leader": null,
+        "leaders": ["Cyrus"],
         "scenario": null,
         "civilization": "Persia",
         "map_size": null,
@@ -2546,7 +2546,7 @@
         "title": "Many Signs and Wonders ",
         "description": "Build all 3 Wonders in the Paths to Nirvana scenario",
         "leader": null,
-        "scenario": null,
+        "scenario": "Path to Nirvana",
         "civilization": null,
         "map_size": null,
         "difficulty": null
@@ -2557,7 +2557,7 @@
         "title": "Do You Have A Moment To Talk About Salvation?",
         "description": "Convert 3 opposing Holy Cities in the Paths to Nirvana scenario",
         "leader": null,
-        "scenario": null,
+        "scenario": "Path to Nirvana",
         "civilization": null,
         "map_size": null,
         "difficulty": null
@@ -2622,7 +2622,7 @@
         "percentage": "0.4",
         "title": "Pizza Party!",
         "description": "Activate Leonardo da Vinci in New York with Great Works from Michelangelo and Donatello -- and a sewer -- all in that city",
-        "leader": null,
+        "leaders": ["Abraham Lincoln", "Teddy Roosevelt"],
         "scenario": null,
         "civilization": null,
         "map_size": null,
@@ -2677,7 +2677,7 @@
         "percentage": "0.4",
         "title": "Greatest Is As Greatest Does",
         "description": "Playing as Macedon, conquer a city containing both the Great Library and Great Lighthouse wonders",
-        "leader": null,
+        "leaders": ["Alexander"],
         "scenario": null,
         "civilization": "",
         "map_size": null,
@@ -2711,7 +2711,7 @@
         "title": "Santé Passe Richesse",
         "description": "Win the Black Death as France",
         "leader": null,
-        "scenario": null,
+        "scenario": "Black Death",
         "civilization": "France",
         "map_size": null,
         "difficulty": null
@@ -2722,7 +2722,7 @@
         "title": "Bendición",
         "description": "Win the Black Death as Castile",
         "leader": null,
-        "scenario": null,
+        "scenario": "Black Death",
         "civilization": "",
         "map_size": null,
         "difficulty": null
@@ -2733,7 +2733,7 @@
         "title": "I'm Not Dead Yet",
         "description": "Win the Black Death after turn 80",
         "leader": null,
-        "scenario": null,
+        "scenario": "Black Death",
         "civilization": null,
         "map_size": null,
         "difficulty": null
@@ -2744,7 +2744,7 @@
         "title": "Aggressive Strain",
         "description": "Win the Black Death after conquering five cities",
         "leader": null,
-        "scenario": null,
+        "scenario": "Black Death",
         "civilization": null,
         "map_size": null,
         "difficulty": null
@@ -2809,7 +2809,7 @@
         "percentage": "0.3",
         "title": "The 25th Dynasty",
         "description": "Playing as Nubia, liberate the original Egyptian capital in a liberation war with the capital's conqueror",
-        "leader": null,
+        "leader": "Amanitore",
         "scenario": null,
         "civilization": "Nubia",
         "map_size": null,
@@ -2843,7 +2843,7 @@
         "title": "You're the Demonstrably Greatest",
         "description": "Achieve the highest possible rank in Conquests of Alexander at Deity difficulty",
         "leader": null,
-        "scenario": null,
+        "scenario": "Conquests of Alexander",
         "civilization": null,
         "map_size": null,
         "difficulty": "Deity"
@@ -2855,7 +2855,7 @@
         "description": "Dread Pirate - Sink 10 ships while using Walk the Plank across multiple games.",
         "leader": null,
         "scenario": null,
-        "civilization": null,
+        "civilization": "Pirates",
         "map_size": null,
         "difficulty": null
     },
@@ -2876,7 +2876,7 @@
         "title": "Resplendent Panoply",
         "description": "Possess all of the following after conquering a city in Conquests of Alexander: Hoplite, Saka Horse Archer, Maryannu Chariot Archer, Immortal, and Varu",
         "leader": null,
-        "scenario": null,
+        "scenario": "Conquests of Alexander",
         "civilization": null,
         "map_size": null,
         "difficulty": null
@@ -2887,7 +2887,7 @@
         "title": "Total A-Nile-hilation",
         "description": "Playing Gifts of the Nile as Egypt, win on Deity difficulty",
         "leader": null,
-        "scenario": null,
+        "scenario": "Gifts of the Nile",
         "civilization": "Egypt",
         "map_size": null,
         "difficulty": null
@@ -3020,7 +3020,7 @@
         "title": "Vernichtungsstrategie",
         "description": "As Germany, win War Machine within 25 turns",
         "leader": null,
-        "scenario": null,
+        "scenario": "War Machine",
         "civilization": "Germany",
         "map_size": null,
         "difficulty": null
@@ -3031,7 +3031,7 @@
         "title": "Danse Macabre",
         "description": "Win the Black Death scenario on Deity difficulty",
         "leader": null,
-        "scenario": null,
+        "scenario": "Black Death",
         "civilization": null,
         "map_size": null,
         "difficulty": null
@@ -3042,7 +3042,7 @@
         "title": "That's Some Good Kerma",
         "description": "Playing Gifts of the Nile as Nubia, win on Deity difficulty",
         "leader": null,
-        "scenario": null,
+        "scenario": "Gifts of the Nile",
         "civilization": "Nubia",
         "map_size": null,
         "difficulty": null
@@ -3107,7 +3107,7 @@
         "percentage": "0.3",
         "title": "Pyramid Scheme",
         "description": "As Nubia, earn six different adjacency bonuses on a Nubian Pyramid",
-        "leader": null,
+        "leader": "Amanitore",
         "scenario": null,
         "civilization": "Nubia",
         "map_size": null,
@@ -3119,7 +3119,7 @@
         "title": "From Med to Red to the Land of the Dead",
         "description": "Playing Gifts of the Nile as Egypt, conquer Irem and Punt",
         "leader": null,
-        "scenario": null,
+        "scenario": "Gifts of the Nile",
         "civilization": "Egypt",
         "map_size": null,
         "difficulty": null
@@ -3130,7 +3130,7 @@
         "title": "Sea of the Bow",
         "description": "Playing Gifts of the Nile as Nubia, found a coastal city on the Mediterranean Sea",
         "leader": null,
-        "scenario": null,
+        "scenario": "Gifts of the Nile",
         "civilization": "Nubia",
         "map_size": null,
         "difficulty": null
@@ -3140,7 +3140,7 @@
         "percentage": "0.3",
         "title": "I Quenched Your Thirst For Blood",
         "description": "Playing as Scythia, recapture one of your founded cities from Persia",
-        "leader": null,
+        "leaders": ["Tomyris"],
         "scenario": null,
         "civilization": "",
         "map_size": null,
@@ -3174,7 +3174,7 @@
         "title": "Out of Sight, Out of Mind",
         "description": "Aliens - Attack while cloaked 20 times.",
         "leader": null,
-        "scenario": null,
+        "scenario": "Red Death",
         "civilization": null,
         "map_size": null,
         "difficulty": null
@@ -3196,7 +3196,7 @@
         "title": "From the Outer Darkness",
         "description": "Mutants - Attack a unit outside the Red Death while inside the Red Death 20 times.",
         "leader": null,
-        "scenario": null,
+        "scenario": "Red Death",
         "civilization": null,
         "map_size": null,
         "difficulty": null
@@ -3229,7 +3229,7 @@
         "title": "Ashes of Time",
         "description": "Wanderers - Explore 30 city ruins across multiple games.",
         "leader": null,
-        "scenario": null,
+        "scenario": "Red Death",
         "civilization": null,
         "map_size": null,
         "difficulty": null
@@ -3240,7 +3240,7 @@
         "title": "Experience Is Everything",
         "description": "Preppers - Have 5 units earn 5 promotions across multiple games.",
         "leader": null,
-        "scenario": null,
+        "scenario": "Red Death",
         "civilization": null,
         "map_size": null,
         "difficulty": null
@@ -3251,7 +3251,7 @@
         "title": "It's Alive!",
         "description": "Mad Scientists - Heal 1000 health points across multiple games.",
         "leader": null,
-        "scenario": null,
+        "scenario": "Red Death",
         "civilization": null,
         "map_size": null,
         "difficulty": null
@@ -3273,7 +3273,7 @@
         "title": "Getting Pruney",
         "description": "Pirates - Spend 50 turns in the water across multiple games.",
         "leader": null,
-        "scenario": null,
+        "scenario": "Red Death",
         "civilization": null,
         "map_size": null,
         "difficulty": null
@@ -3284,7 +3284,7 @@
         "title": "Love It When a Plan Comes Together",
         "description": "Hoarder - Sink or capture a treasure ship while a treasure escort is locked by a chainshot.",
         "leader": null,
-        "scenario": null,
+        "scenario": "Pirates",
         "civilization": null,
         "map_size": null,
         "difficulty": null
@@ -3295,7 +3295,7 @@
         "title": "U mad, bro?",
         "description": "Borderlords - Trick enemy factions into triggering Grieving Gifts 5 times across multiple games.",
         "leader": null,
-        "scenario": null,
+        "scenario": "Red Death",
         "civilization": null,
         "map_size": null,
         "difficulty": null
@@ -3306,7 +3306,7 @@
         "title": "It Hungers",
         "description": "Cultists - Kill 10 units with the Undying Eye.",
         "leader": null,
-        "scenario": null,
+        "scenario": "Red Death",
         "civilization": null,
         "map_size": null,
         "difficulty": null
@@ -3317,7 +3317,7 @@
         "title": "NERDS!",
         "description": "Jocks - Use Hail Marys to wound, but not kill, 5 Civilians across multiple games.",
         "leader": null,
-        "scenario": null,
+        "scenario": "Red Death",
         "civilization": null,
         "map_size": null,
         "difficulty": null
@@ -3328,7 +3328,7 @@
         "title": "They're coming to get you, Barbara",
         "description": "Zombie Beastmasters - Spawn 30 Zombie Hordes through combat kills.",
         "leader": null,
-        "scenario": null,
+        "scenario": "Red Death",
         "civilization": null,
         "map_size": null,
         "difficulty": null
