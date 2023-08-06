@@ -7,7 +7,7 @@
         "module": "ES2022",
         "target": "ES2022",
 
-        "outDir": "./dist",
+        "outDir": "./assets",
         "rootDir": "./src",
         "experimentalDecorators": true,
         "moduleResolution": "node",
