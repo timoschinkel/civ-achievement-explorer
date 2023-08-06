@@ -3,10 +3,13 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc --watch",
-    "start": "web-dev-server --node-resolve --open --watch --app-index assets/index.html"
+    "start": "web-dev-server --node-resolve --open --watch --app-index assets/index.html",
+    "bundle": "node scripts/build.js"
   },
   "devDependencies": {
     "@web/dev-server": "^0.2.1",
+    "esbuild": "^0.18.18",
+    "glob": "^10.3.3",
     "typescript": "^5.0.4"
   },
   "dependencies": {
