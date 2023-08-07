@@ -87,13 +87,6 @@ class CivAchievementsFilter extends LitElement {
         fetch(url)
             .then(response => response.json())
             .then((json: Achievement[]) => {
-                const unlocked = Object.entries(this.unlocked).length;
-                const total = json.length;
-                const percentage = Math.round((unlocked/total)*100);
-                this.shadowRoot.querySelector('[data-placeholder="unlocked"]').innerHTML = unlocked.toString();
-                this.shadowRoot.querySelector('[data-placeholder="total"]').innerHTML = total.toString();
-                this.shadowRoot.querySelector('[data-placeholder="percentage"]').innerHTML = percentage.toString();
-
                 const filtered = json.reduce(
                     (carry: Record<string, string[]>, achievement: Achievement) => {
                         const add = (current: string[]|null, value: string|string[]|null): string[] => {
@@ -137,6 +130,8 @@ class CivAchievementsFilter extends LitElement {
                     json.map(({ title, img, leader, leaders, scenario, map_size, difficulty, description }) => html`<civ-achievement data-order="${order++}" @achievement-pinned=${this._handlePinned.bind(this)} @achievement-unpinned=${this._handleUnpinned.bind(this)} title=${title} image=${img} leader=${leader} leaders=${JSON.stringify(leaders)} scenario=${scenario} map_size=${map_size} difficulty=${difficulty} description=${description} unlocked=${ifDefined(this.unlocked[title] ? '1' : undefined)} @click=${this._clickAchievement.bind(this)}>`),
                     this.shadowRoot?.querySelector('.achievements') as HTMLDivElement
                 );
+
+                this.updateProgress();
             })
             .catch(console.error);
     }
@@ -170,6 +165,18 @@ class CivAchievementsFilter extends LitElement {
         }
 
         localStorage.setItem('unlocked', JSON.stringify(this.unlocked));
+        this.updateProgress();
+    }
+
+    private updateProgress(): void 
+    {
+        const total = this.shadowRoot.querySelectorAll('.achievements civ-achievement').length;
+        const unlocked = this.shadowRoot.querySelectorAll('.achievements civ-achievement[unlocked]').length;
+        const percentage = Math.round((unlocked/total)*100);
+
+        this.shadowRoot.querySelector('[data-placeholder="unlocked"]').innerHTML = unlocked.toString();
+        this.shadowRoot.querySelector('[data-placeholder="total"]').innerHTML = total.toString();
+        this.shadowRoot.querySelector('[data-placeholder="percentage"]').innerHTML = percentage.toString();
     }
 
     // Source: https://medium.com/dev-jam/lit-html-communication-between-components-using-the-mediator-pattern-6d1d3d2efce7
