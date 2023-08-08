@@ -46,6 +46,11 @@ class CivAchievementsFilter extends LitElement {
         .progress {
             margin: .5rem 0;
         }
+
+        fieldset { container-type: inline-size; container-name: filter; }
+        @container filter (width < 500px) {
+            fieldset > * { display: block; width: 100%; margin: 0.25rem 0; }
+        }
     `
 
     render() {
