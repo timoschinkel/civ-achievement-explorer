@@ -17,14 +17,11 @@ type Achievement = {
 
 @customElement('civ-achievements-filter')
 class CivAchievementsFilter extends LitElement {
-
-    // Source: https://rodydavis.com/posts/lit-html-table/
-    private data;
-
     @property()
     public src;
 
-    private unlocked = {};
+    private unlocked = {} as Record<string, boolean>;
+    private pinned = {} as Record<string, boolean>;
 
     static styles = css`
         :host {
@@ -82,6 +79,7 @@ class CivAchievementsFilter extends LitElement {
     {
         // get data from local storage
         this.unlocked = JSON.parse(localStorage.getItem('unlocked') || '{}');
+        this.pinned = JSON.parse(localStorage.getItem('pinned') || '{}');
 
         const url = new URL(this.src, import.meta.url);
         fetch(url)
@@ -123,33 +121,47 @@ class CivAchievementsFilter extends LitElement {
                 populate(this.shadowRoot.querySelector('[name="scenario"]'), filtered.scenarios);
                 populate(this.shadowRoot.querySelector('[name="map_size"]'), filtered.map_sizes);
                 populate(this.shadowRoot.querySelector('[name="difficulty"]'), filtered.difficulties);
-                
+
                 // Achievements
                 let order = 0;
                 render(
-                    json.map(({ title, img, leader, leaders, scenario, map_size, difficulty, description }) => html`<civ-achievement data-order="${order++}" @achievement-pinned=${this._handlePinned.bind(this)} @achievement-unpinned=${this._handleUnpinned.bind(this)} title=${title} image=${img} leader=${leader} leaders=${JSON.stringify(leaders)} scenario=${scenario} map_size=${map_size} difficulty=${difficulty} description=${description} unlocked=${ifDefined(this.unlocked[title] ? '1' : undefined)} @click=${this._clickAchievement.bind(this)}>`),
+                    json.map(({ title, img, leader, leaders, scenario, map_size, difficulty, description }) => html`<civ-achievement data-order="${order++}" @achievement-pinned=${this._handlePinned.bind(this)} @achievement-unpinned=${this._handleUnpinned.bind(this)} title=${title} image=${img} leader=${leader} leaders=${JSON.stringify(leaders)} scenario=${scenario} map_size=${map_size} difficulty=${difficulty} description=${description} unlocked=${ifDefined(this.unlocked[title] ? '1' : undefined)} pinned=${ifDefined(this.pinned[title] ? '1' : undefined)} @click=${this._clickAchievement.bind(this)}>`),
                     this.shadowRoot?.querySelector('.achievements') as HTMLDivElement
                 );
 
                 this.updateProgress();
+
+                for (const [title, pinned] of Object.entries(this.pinned)) {
+                    const achievement = this.shadowRoot.querySelector(`civ-achievement[title="${title}"]`) as CivAchievement;
+                    if (achievement && pinned) {
+                        achievement.pinned = '1';
+                        achievement.style.order = (0 - this.shadowRoot.querySelectorAll('civ-achievement').length + this.shadowRoot.querySelectorAll('civ-achievement[pinned]').length).toString();
+                    }
+                };
             })
             .catch(console.error);
     }
 
     private _handlePinned(event: CustomEvent): void 
     {
-        const achievement = event.target as HTMLElement;
+        const achievement = event.target as CivAchievement;
         achievement.style.order = (0 - this.shadowRoot.querySelectorAll('civ-achievement').length + this.shadowRoot.querySelectorAll('civ-achievement[pinned]').length).toString();
+
+        this.pinned[achievement.title] = true;
+        localStorage.setItem('pinned', JSON.stringify(this.pinned));
     }
 
     private _handleUnpinned(event: CustomEvent): void 
     {
-        const achievement = event.target as HTMLElement;
+        const achievement = event.target as CivAchievement;
         achievement.style.order = '';
 
         // renumber all still pinned elements
         const pinned = Array.from(this.shadowRoot.querySelectorAll('civ-achievement[pinned="1"]'))
             .sort((one: HTMLElement, another: HTMLElement): number => another.style.order.localeCompare(one.style.order, undefined, { numeric: true }));
+
+        delete this.pinned[achievement.title];
+        localStorage.setItem('pinned', JSON.stringify(this.pinned));
     }
 
     private _clickAchievement(event: MouseEvent): void
