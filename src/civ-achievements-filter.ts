@@ -138,19 +138,18 @@ class CivAchievementsFilter extends LitElement {
 
     private _handlePinned(event: CustomEvent): void 
     {
-        // const achievement = event.target as HTMLElement;
-        // achievement.style.order = (0 - this.shadowRoot.querySelectorAll('civ-achievement').length + this.shadowRoot.querySelectorAll('civ-achievement[pinned]').length).toString();
+        const achievement = event.target as HTMLElement;
+        achievement.style.order = (0 - this.shadowRoot.querySelectorAll('civ-achievement').length + this.shadowRoot.querySelectorAll('civ-achievement[pinned]').length).toString();
     }
 
     private _handleUnpinned(event: CustomEvent): void 
     {
-        // const achievement = event.target as HTMLElement;
-        // achievement.style.order = '';
+        const achievement = event.target as HTMLElement;
+        achievement.style.order = '';
 
-        // // renumber all still pinned elements
-        // const pinned = Array.from(this.shadowRoot.querySelectorAll('civ-achievement[pinned="1"]'))
-        //     .sort((one: HTMLElement, another: HTMLElement): number => another.style.order.localeCompare(one.style.order, undefined, { numeric: true }));
-        // console.log(pinned);
+        // renumber all still pinned elements
+        const pinned = Array.from(this.shadowRoot.querySelectorAll('civ-achievement[pinned="1"]'))
+            .sort((one: HTMLElement, another: HTMLElement): number => another.style.order.localeCompare(one.style.order, undefined, { numeric: true }));
     }
 
     private _clickAchievement(event: MouseEvent): void
