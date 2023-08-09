@@ -1,6 +1,8 @@
 # Civ achievement explorer
 A webcomponents experiment to keep track of the Steam achievements for Civilization VI.
 
+This application is available on [https://timoschinkel.github.io/civ-achievement-explorer/](https://timoschinkel.github.io/civ-achievement-explorer/).
+
 ## Background
 In my opinion the best way to learn a new language, methodology or framework is by building an actual application, as you will encounter scenarios not covered in any tutorials. I have been wanting to experiment with [webcomponents ](https://www.webcomponents.org/) for a while. Currently I am on a [Civilization VI](https://civilization.com/) spree, and because I am a bit of a completionist I am trying to unlock all achievements.
 
