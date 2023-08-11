@@ -950,7 +950,7 @@
         "percentage": "4.0",
         "title": "Sultan of Egypt",
         "description": "Win a regular game as Saladin",
-        "leaders": ["Saladin", "Saladin (Sultan)"],
+        "leaders": ["Saladin"],
         "scenario": "Regular game",
         "civilization": "",
         "map_size": null,
