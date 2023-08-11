@@ -12,9 +12,6 @@ export class CivAchievement extends LitElement {
     @property()
     public description: string;
 
-    @property()
-    public leader: string;
-
     @property({ type: Array })
     public leaders: string[];
 
