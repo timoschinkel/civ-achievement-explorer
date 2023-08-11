@@ -4,8 +4,7 @@ import { CivAchievement } from './civ-achievement';
 import { ifDefined } from 'lit-html/directives/if-defined.js'; 
 
 type Achievement = {
-    leader: string | null;
-    leaders?: string[];
+    leaders: string[];
     img: string | null;
     title: string | null;
     description: string | null;
@@ -104,7 +103,7 @@ class CivAchievementsFilter extends LitElement {
 
                         return {
                             ...carry,
-                            leaders: add(carry.leaders, achievement.leader ?? achievement.leaders ?? null),
+                            leaders: add(carry.leaders, achievement.leaders ?? null),
                             scenarios: add(carry.scenarios, achievement.scenario),
                             map_sizes: add(carry.map_sizes, achievement.map_size),
                             difficulties: add(carry.difficulties, achievement.difficulty),
@@ -130,7 +129,7 @@ class CivAchievementsFilter extends LitElement {
                 // Achievements
                 let order = 0;
                 render(
-                    json.map(({ title, img, leader, leaders, scenario, map_size, difficulty, description }) => html`<civ-achievement data-order="${order++}" @achievement-pinned=${this._handlePinned.bind(this)} @achievement-unpinned=${this._handleUnpinned.bind(this)} title=${title} image=${img} leader=${leader} leaders=${JSON.stringify(leaders)} scenario=${scenario} map_size=${map_size} difficulty=${difficulty} description=${description} unlocked=${ifDefined(this.unlocked[title] ? '1' : undefined)} pinned=${ifDefined(this.pinned[title] ? '1' : undefined)} @click=${this._clickAchievement.bind(this)}>`),
+                    json.map(({ title, img, leaders, scenario, map_size, difficulty, description }) => html`<civ-achievement data-order="${order++}" @achievement-pinned=${this._handlePinned.bind(this)} @achievement-unpinned=${this._handleUnpinned.bind(this)} title=${title} image=${img} leaders=${JSON.stringify(leaders)} scenario=${scenario} map_size=${map_size} difficulty=${difficulty} description=${description} unlocked=${ifDefined(this.unlocked[title] ? '1' : undefined)} pinned=${ifDefined(this.pinned[title] ? '1' : undefined)} @click=${this._clickAchievement.bind(this)}>`),
                     this.shadowRoot?.querySelector('.achievements') as HTMLDivElement
                 );
 
@@ -231,7 +230,7 @@ class CivAchievementsFilter extends LitElement {
             const applies = (achievement: CivAchievement, filter: Filter): boolean => {
                 if (achievement.pinned === '1') return true;
                 if (filter.query && achievement.description.toLocaleLowerCase().includes(filter.query.toLocaleLowerCase()) === false && achievement.title.toLocaleLowerCase().includes(filter.query.toLocaleLowerCase()) === false) return false;
-                if (filter.leader && achievement.leader !== filter.leader && !(achievement.leaders || []).includes(filter.leader)) return false;
+                if (filter.leader && !(achievement.leaders || []).includes(filter.leader)) return false;
                 if (filter.scenario && achievement.scenario !== filter.scenario) return false;
                 if (filter.unlocked && achievement.title in this.unlocked && this.unlocked[achievement.title] === true) return false;
 
