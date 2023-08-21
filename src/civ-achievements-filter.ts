@@ -1,7 +1,7 @@
 import { css, LitElement, html, render } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { CivAchievement } from './civ-achievement';
-import { ifDefined } from 'lit-html/directives/if-defined.js'; 
+import { ifDefined } from 'lit-html/directives/if-defined.js';
 
 type Achievement = {
     leaders: string[];
@@ -62,7 +62,7 @@ class CivAchievementsFilter extends LitElement {
                     <select name="scenario" @change=${this.onChange}><option selected value="">Scenario</option></select>
                     <select name="map_size" @change=${this.onChange}><option selected value="">Map size</option></select>
                     <select name="difficulty" @change=${this.onChange}><option selected value="">Difficulty</option></select>
-                    <label><input type="checkbox" name="unlocked" @change=${this.onChange}> Unlocked</label>
+                    <label><input type="checkbox" name="locked" @change=${this.onChange}> Not yet unlocked</label>
                 </fieldset>
             </form>
             <div class="progress">
@@ -92,7 +92,7 @@ class CivAchievementsFilter extends LitElement {
                 const filtered = json.reduce(
                     (carry: Record<string, string[]>, achievement: Achievement) => {
                         const add = (current: string[]|null, value: string|string[]|null): string[] => {
-                            if (Array.isArray(value)) {                                
+                            if (Array.isArray(value)) {
                                 return value.reduce((carry, v) => add(carry, v), [ ...current || []]);
                             }
 
@@ -146,7 +146,7 @@ class CivAchievementsFilter extends LitElement {
             .catch(console.error);
     }
 
-    private _handlePinned(event: CustomEvent): void 
+    private _handlePinned(event: CustomEvent): void
     {
         const achievement = event.target as CivAchievement;
         achievement.style.order = (0 - this.shadowRoot.querySelectorAll('civ-achievement').length + this.shadowRoot.querySelectorAll('civ-achievement[pinned]').length).toString();
@@ -155,7 +155,7 @@ class CivAchievementsFilter extends LitElement {
         localStorage.setItem('pinned', JSON.stringify(this.pinned));
     }
 
-    private _handleUnpinned(event: CustomEvent): void 
+    private _handleUnpinned(event: CustomEvent): void
     {
         const achievement = event.target as CivAchievement;
         achievement.style.order = '';
@@ -174,7 +174,7 @@ class CivAchievementsFilter extends LitElement {
         if (achievement.unlocked) {
             achievement.removeAttribute('unlocked');
             delete this.unlocked[achievement.title];
-        } else {            
+        } else {
             achievement.setAttribute('unlocked', '1');
             this.unlocked[achievement.title] = true;
         }
@@ -183,7 +183,7 @@ class CivAchievementsFilter extends LitElement {
         this.updateProgress();
     }
 
-    private updateProgress(): void 
+    private updateProgress(): void
     {
         const total = this.shadowRoot.querySelectorAll('.achievements civ-achievement').length;
         const unlocked = this.shadowRoot.querySelectorAll('.achievements civ-achievement[unlocked]').length;
@@ -206,7 +206,7 @@ class CivAchievementsFilter extends LitElement {
         this.applyFilter();
     }
 
-    private applyFilter(): void 
+    private applyFilter(): void
     {
         type Filter = {
             query: string;
@@ -214,7 +214,7 @@ class CivAchievementsFilter extends LitElement {
             scenario: string;
             map_size: string;
             difficulty: string;
-            unlocked: boolean;
+            locked: boolean;
         }
 
         const filter: Filter = {
@@ -223,7 +223,7 @@ class CivAchievementsFilter extends LitElement {
             scenario: (this.shadowRoot.querySelector('[name="scenario"]') as HTMLSelectElement).value,
             map_size: (this.shadowRoot.querySelector('[name="map_size"]') as HTMLSelectElement).value,
             difficulty: (this.shadowRoot.querySelector('[name="difficulty"]') as HTMLSelectElement).value,
-            unlocked: (this.shadowRoot.querySelector('[name="unlocked"]') as HTMLInputElement).checked,
+            locked: (this.shadowRoot.querySelector('[name="locked"]') as HTMLInputElement).checked,
         };
 
         this.shadowRoot.querySelectorAll('.achievements > civ-achievement').forEach((achievement: CivAchievement) => {
@@ -232,7 +232,7 @@ class CivAchievementsFilter extends LitElement {
                 if (filter.query && achievement.description.toLocaleLowerCase().includes(filter.query.toLocaleLowerCase()) === false && achievement.title.toLocaleLowerCase().includes(filter.query.toLocaleLowerCase()) === false) return false;
                 if (filter.leader && !(achievement.leaders || []).includes(filter.leader)) return false;
                 if (filter.scenario && achievement.scenario !== filter.scenario) return false;
-                if (filter.unlocked && achievement.title in this.unlocked && this.unlocked[achievement.title] === true) return false;
+                if (filter.locked && achievement.title in this.unlocked && this.unlocked[achievement.title] === true) return false;
 
                 return true;
             };

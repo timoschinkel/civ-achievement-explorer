@@ -54,11 +54,11 @@ export class CivAchievement extends LitElement {
             filter: none;
         }
 
-        :host .image { 
-            order: 0; 
+        :host .image {
+            order: 0;
         }
-        :host .meta { 
-            order: 1; 
+        :host .meta {
+            order: 1;
         }
 
         :host img {
@@ -91,7 +91,7 @@ export class CivAchievement extends LitElement {
 
     public connectedCallback(): void {
         super.connectedCallback()
-        
+
         // const unlocked = JSON.parse(localStorage.getItem('unlocked') || '{}');
         // this.unlocked = unlocked?.[this.title] === true;
     }
@@ -113,7 +113,7 @@ export class CivAchievement extends LitElement {
     render() {
         return html`
             <div class="meta">
-                <h2>${this.title}</h2>                
+                <h2>${this.title}</h2>
                 <p>${this.description}</p>
             </div>
             <div class="image">
