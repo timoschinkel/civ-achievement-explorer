@@ -232,6 +232,8 @@ class CivAchievementsFilter extends LitElement {
                 if (filter.query && achievement.description.toLocaleLowerCase().includes(filter.query.toLocaleLowerCase()) === false && achievement.title.toLocaleLowerCase().includes(filter.query.toLocaleLowerCase()) === false) return false;
                 if (filter.leader && !(achievement.leaders || []).includes(filter.leader)) return false;
                 if (filter.scenario && achievement.scenario !== filter.scenario) return false;
+                if (filter.map_size && achievement.map_size !== filter.map_size) return false;
+                if (filter.difficulty && achievement.difficulty !== filter.difficulty) return false;
                 if (filter.locked && achievement.title in this.unlocked && this.unlocked[achievement.title] === true) return false;
 
                 return true;
