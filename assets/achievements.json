@@ -3375,5 +3375,148 @@
         "civilization": null,
         "map_size": null,
         "difficulty": null
+    },
+    {
+        "img": "https://cdn.akamai.steamstatic.com/steamcommunity/public/images/apps/289070/36ab5e4e01e9382704cee49f26b81b558fa40340.jpg",
+        "percentage": "0",
+        "title": "Valley of Kings",
+        "description": "Win a regular game as Ramses II",
+        "leaders": [ "Ramses II" ],
+        "scenario": "Regular game",
+        "civilization": "",
+        "map_size": null,
+        "difficulty": null
+    },
+    {
+        "img": "https://cdn.akamai.steamstatic.com/steamcommunity/public/images/apps/289070/2aaef4ce5866156a373bff2c123b3b076de08264.jpg",
+        "percentage": "0",
+        "title": "The Power Beside the Throne",
+        "description": "Win a regular game as Theodora",
+        "leaders": [ "Theodora" ],
+        "scenario": "Regular game",
+        "civilization": "",
+        "map_size": null,
+        "difficulty": null
+    },
+    {
+        "img": "https://cdn.akamai.steamstatic.com/steamcommunity/public/images/apps/289070/a7b86d1125c402d4a0deade5b3311d2ec97d8ee8.jpg",
+        "percentage": "0",
+        "title": "Partial Completionist",
+        "description": "Win a regular game as Ludwig II",
+        "leaders": [ "Ludwig II" ],
+        "scenario": "Regular game",
+        "civilization": "",
+        "map_size": null,
+        "difficulty": null
+    },
+    {
+        "img": "https://cdn.akamai.steamstatic.com/steamcommunity/public/images/apps/289070/4fdb370f81059b8085eb65e553d9a75bc2fa5b6e.jpg",
+        "percentage": "0",
+        "title": "Father of Korean Literature",
+        "description": "Win a regular game as Sejong",
+        "leaders": [ "Sejong" ],
+        "scenario": "Regular game",
+        "civilization": "",
+        "map_size": null,
+        "difficulty": null
+    },
+    {
+        "img": "https://cdn.akamai.steamstatic.com/steamcommunity/public/images/apps/289070/5b160ce9828e5e3dc2d52693514813535f6a403f.jpg",
+        "percentage": "0",
+        "title": "Dawn of a Dynasty",
+        "description": "Win a regular game as Sundiata Keita",
+        "leaders": [ "Sundiata Keita" ],
+        "scenario": "Regular game",
+        "civilization": "",
+        "map_size": null,
+        "difficulty": null
+    },
+    {
+        "img": "https://cdn.akamai.steamstatic.com/steamcommunity/public/images/apps/289070/8e920bacfd28e3adba35074e0eda36753254114b.jpg",
+        "percentage": "0",
+        "title": "Salad Sensation",
+        "description": "Win a regular game as Julius Caesar",
+        "leaders": [ "Julius Caesar" ],
+        "scenario": "Regular game",
+        "civilization": "",
+        "map_size": null,
+        "difficulty": null
+    },
+    {
+        "img": "https://cdn.akamai.steamstatic.com/steamcommunity/public/images/apps/289070/a420532ee655732bfb2a71cff5f785f01c2eb606.jpg",
+        "percentage": "0",
+        "title": "Mother’s Day",
+        "description": "Win a regular game as Wu Zetian",
+        "leaders": [ "Wu Zetian" ],
+        "scenario": "Regular game",
+        "civilization": "",
+        "map_size": null,
+        "difficulty": null
+    },
+    {
+        "img": "https://cdn.akamai.steamstatic.com/steamcommunity/public/images/apps/289070/23e6fce5b18999d4818491599f104b292d77178b.jpg",
+        "percentage": "0",
+        "title": "Live Yongle Reaction",
+        "description": "Win a regular game as Yongle",
+        "leaders": [ "Yongle" ],
+        "scenario": "Regular game",
+        "civilization": "",
+        "map_size": null,
+        "difficulty": null
+    },
+    {
+        "img": "https://cdn.akamai.steamstatic.com/steamcommunity/public/images/apps/289070/642b33f4399536fb6772f6da26c6cc2fd7ce4dad.jpg",
+        "percentage": "0",
+        "title": "Claimants of the Peacock Throne",
+        "description": "Win a regular game as Nader Shah",
+        "leaders": [ "Nader Shah" ],
+        "scenario": "Regular game",
+        "civilization": "",
+        "map_size": null,
+        "difficulty": null
+    },
+    {
+        "img": "https://cdn.akamai.steamstatic.com/steamcommunity/public/images/apps/289070/9bbad5d290442f06565758ed97f17d849d599672.jpg",
+        "percentage": "0",
+        "title": "I Will Wait",
+        "description": "Win a regular game as Tokugawa",
+        "leaders": [ "Tokugawa" ],
+        "scenario": "Regular game",
+        "civilization": "",
+        "map_size": null,
+        "difficulty": null
+    },
+    {
+        "img": "https://cdn.akamai.steamstatic.com/steamcommunity/public/images/apps/289070/c3c80bf0aa2242192b73f494393e0ae92519e691.jpg",
+        "percentage": "0",
+        "title": "The Self-Made Throne",
+        "description": "Win a regular game as Nzinga Mbande",
+        "leaders": [ "Nzinga Mbande" ],
+        "scenario": "Regular game",
+        "civilization": "",
+        "map_size": null,
+        "difficulty": null
+    },
+    {
+        "img": "https://cdn.akamai.steamstatic.com/steamcommunity/public/images/apps/289070/ddaf9f435b2af7fc8575415d1b30b5d16976e897.jpg",
+        "percentage": "0",
+        "title": "Addressing Gettysburg",
+        "description": "Win a regular game as Abraham Lincoln",
+        "leaders": [ "Abraham Lincoln" ],
+        "scenario": "Regular game",
+        "civilization": "",
+        "map_size": null,
+        "difficulty": null
+    },
+    {
+        "img": "https://cdn.akamai.steamstatic.com/steamcommunity/public/images/apps/289070/5721cd851f6c1e8d4b0a8aa44e7b9b3c04804233.jpg",
+        "percentage": "0",
+        "title": "The Triumphs of Oriana",
+        "description": "Win a regular game as Elizabeth I",
+        "leaders": [ "Elizabeth I" ],
+        "scenario": "Regular game",
+        "civilization": "",
+        "map_size": null,
+        "difficulty": null
     }
 ]
