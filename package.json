@@ -7,7 +7,7 @@
     "bundle": "node scripts/build.js"
   },
   "devDependencies": {
-    "@web/dev-server": "^0.2.1",
+    "@web/dev-server": "^0.4.6",
     "esbuild": "^0.28.0",
     "glob": "^13.0.6",
     "lit": "^3.3.2",
