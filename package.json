@@ -9,7 +9,7 @@
   "devDependencies": {
     "@web/dev-server": "^0.2.1",
     "esbuild": "^0.28.0",
-    "glob": "^10.3.3",
+    "glob": "^13.0.6",
     "lit": "^3.3.2",
     "typescript": "^5.0.4"
   }
